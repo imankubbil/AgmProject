@@ -66,7 +66,11 @@ export class AppComponent implements OnInit {
     console.log('idle')
   }
 
-public updateMapCenter() {
+  public mapDragEnd() {
+    console.log("Testing");
+  }
+
+  public updateMapCenter() {
     // this.mapCenter = {
       this.latitude = this.map.center.lat(),
       this.longitude = this.map.center.lng()
@@ -75,16 +79,20 @@ public updateMapCenter() {
     console.log(this.map.center.lng());
     console.log('update')
   }
-
+  
   mapReady(evt) {
     console.log("map ready",evt);
     console.log("lat",evt.center.lat());
   }
-
+  
   centerChange(ev) {
-    var me = this;
+    this.latitude = this.map.center.lat(),
+    this.longitude = this.map.center.lng()
+    // var me = this;
     console.log("centre change called");
-    console.log(me);
+    console.log(this.map.center.lat());
+    console.log(this.map.center.lng());
+    // console.log(me);
     // this.getPosition();
   }
 

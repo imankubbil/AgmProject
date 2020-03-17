@@ -5,11 +5,16 @@
     <label>Enter Address</label>
     <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" #search>
   </div>
-  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [usePanning] = "true" (idle)="updateMapCenter()"
-  (mapReady)="getMapInstance($event)" >
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [usePanning] = "true" [mapTypeControl]="true" [showDefaultInfoWindow]="true" [scrollwheel]="true" [disableDefaultUI]= false
+  (mapReady)="getMapInstance($event)" (centerChange)="centerChange($event)">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)">
     </agm-marker>
   </agm-map>
+  <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [usePanning] = "true" (idle)="updateMapCenter()"
+  (mapReady)="getMapInstance($event)" (centerChange)="centerChange($event)">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)">
+    </agm-marker>
+  </agm-map> -->
 
   <h5>Address : {{ address }}</h5>
   <div>Latitude : {{ latitude }}</div>
