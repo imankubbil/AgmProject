@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   longitude : number;
   zoom : number;
   address : string;
+  map : any;
+  mapCenter : any;
   private geoCoder;
 
   @ViewChild('search')
@@ -57,6 +59,50 @@ export class AppComponent implements OnInit {
       });
     }
   }
+
+  public getMapInstance(map) {
+    this.map = map;
+    console.log(map)
+    console.log('idle')
+  }
+
+public updateMapCenter() {
+    // this.mapCenter = {
+      this.latitude = this.map.center.lat(),
+      this.longitude = this.map.center.lng()
+    // }
+    console.log(this.map.center.lat());
+    console.log(this.map.center.lng());
+    console.log('update')
+  }
+
+  mapReady(evt) {
+    console.log("map ready",evt);
+    console.log("lat",evt.center.lat());
+  }
+
+  centerChange(ev) {
+    var me = this;
+    console.log("centre change called");
+    console.log(me);
+    // this.getPosition();
+  }
+
+  getPosition(){
+    if (navigator.geolocation) {
+      console.log("getPosition1")
+      console.log(navigator.geolocation)
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position)        
+      this.latitude=position.coords.latitude+(0.0000000000100*Math.random());
+      this.longitude=position.coords.longitude+(0.0000000000100*Math.random());
+      console.log(this.latitude)
+      console.log(this.longitude)
+    });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+   }
 
   markerDragEnd($event: MouseEvent) {
     console.log($event);
