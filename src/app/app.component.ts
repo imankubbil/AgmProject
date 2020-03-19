@@ -46,6 +46,8 @@ export class AppComponent implements OnInit {
           this.zoom = 12;
         });
       });
+
+      
     });
   }
 
@@ -55,15 +57,35 @@ export class AppComponent implements OnInit {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 8;
+        
         this.getAddress(this.latitude, this.longitude);
       });
     }
   }
 
+  public convertAddress(kota) {
+		var geocoder = new google.maps.Geocoder();
+		var address = kota;
+
+		geocoder.geocode({ 'address': address }, function (results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				this.latitude = results[0].geometry.location.lat();
+				this.longitude = results[0].geometry.location.lng();
+				this.zoom = 17;
+
+				console.log('convert', this.latitude)
+				console.log('convert', this.longitude)
+			} else {
+				window.alert('No results found');
+			}
+		})
+  }
+  
   public getMapInstance(map) {
     this.map = map;
     console.log(map)
     console.log('idle')
+    
   }
 
   public mapDragEnd() {
@@ -98,14 +120,9 @@ export class AppComponent implements OnInit {
 
   getPosition(){
     if (navigator.geolocation) {
-      console.log("getPosition1")
-      console.log(navigator.geolocation)
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position)        
-      this.latitude=position.coords.latitude+(0.0000000000100*Math.random());
-      this.longitude=position.coords.longitude+(0.0000000000100*Math.random());
-      console.log(this.latitude)
-      console.log(this.longitude)
+      this.latitude  = position.coords.latitude+(0.0000000000100*Math.random());
+      this.longitude = position.coords.longitude+(0.0000000000100*Math.random());
     });
     } else {
       alert("Geolocation is not supported by this browser.");

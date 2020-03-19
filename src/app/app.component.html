@@ -6,7 +6,7 @@
     <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" #search>
   </div>
   <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" [usePanning] = "true" [mapTypeControl]="true" [showDefaultInfoWindow]="true" [scrollwheel]="true" [disableDefaultUI]= false
-  (mapReady)="getMapInstance($event)" (centerChange)="centerChange($event)">
+  (mapReady)="getMapInstance($event)" (idle)="updateMapCenter()">
     <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)">
     </agm-marker>
   </agm-map>
