@@ -97,9 +97,7 @@ export class AppComponent implements OnInit {
       this.latitude = this.map.center.lat(),
       this.longitude = this.map.center.lng()
     // }
-    console.log(this.map.center.lat());
-    console.log(this.map.center.lng());
-    console.log('update')
+    this.getAddress(this.latitude, this.longitude);
   }
   
   mapReady(evt) {
@@ -110,12 +108,6 @@ export class AppComponent implements OnInit {
   centerChange(ev) {
     this.latitude = this.map.center.lat(),
     this.longitude = this.map.center.lng()
-    // var me = this;
-    console.log("centre change called");
-    console.log(this.map.center.lat());
-    console.log(this.map.center.lng());
-    // console.log(me);
-    // this.getPosition();
   }
 
   getPosition(){
